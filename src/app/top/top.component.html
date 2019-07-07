@@ -1,0 +1,49 @@
+<app-navigation>
+
+  <div class="outline" fxLayout="column" fxLayoutGap="24px grid">
+    <!-- Column-1 -->
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <mat-card>
+        <mat-card-content>
+          <h2>Your Environments</h2>
+          <h4>OS: {{ usingPlatform }}</h4>
+          <h4>Browser: {{ usingBrowser }}</h4>
+          <h4>Language: {{ usingBrowserLanguage }}</h4>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+
+    <!-- Column-2 -->
+    <div fxLayout="row wrap">
+      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex="33" *ngFor="let content of contents">
+        <mat-grid-list cols="1" rowHeight="1:1">
+          <mat-grid-tile>
+            
+            <mat-card class="card">
+
+              <mat-card-header class="card-header">
+                <mat-card-title>{{ content.title }}</mat-card-title>
+              </mat-card-header>
+
+              <mat-list>
+                <mat-list-item class="top-list" *ngFor="let page of content.pages" routerLink="/{{page.url}}">
+                  <mat-icon class="list-icon">{{ page.icon }}</mat-icon>
+                  {{ page.page_title }}
+                </mat-list-item>
+              </mat-list>
+
+            </mat-card>
+
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
+
+    <!-- Column-3 -->
+    <div fxLayout="row"></div>
+
+    
+  </div>
+
+</app-navigation>

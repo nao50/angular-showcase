@@ -1,0 +1,31 @@
+.outline {
+    padding: 28px;
+}
+
+.top-list {
+    cursor: pointer;
+}
+
+.top-list:hover {
+    transition: all 0.3s;
+    background-color: rgba(43,133,231,.12);
+    border-radius: 4px;
+}
+.top-list:focus {
+    outline: -webkit-focus-ring-color 0px;
+}
+
+.card {
+    height: 95%;
+    width: 95%;
+    padding: 0;
+}
+
+.card-header {
+    padding: 16px 16px 0px 16px;
+}
+
+.list-icon {
+    padding-left: 4px;
+    padding-right: 16px;
+}

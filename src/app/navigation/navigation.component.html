@@ -1,0 +1,153 @@
+<div class="navigation-container">
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+
+    <a _ngcontent-c0="" routerLink="/top">
+      <img _ngcontent-c0="" alt="logo" class="toolbar-logo" height="30" src="../../assets/icons/icon-96x96.png">
+    </a>
+    <h1>ANGULAR SHOWCASE</h1>
+
+    <span class="toolbar-spacer"></span>
+    <button mat-button [mat-menu-trigger-for]="menu" class="toolbar-menu-icon">
+        {{ toolbarMenuString }}
+    </button>
+    <mat-menu xPosition="before" y-position="after" #menu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item disabled> Settings </button>
+        <button mat-menu-item disabled> Help </button>
+        <button mat-menu-item (click)="logout()" disabled> Logout </button>
+    </mat-menu>
+
+  </mat-toolbar>
+
+  <mat-sidenav-container class="navigation-sidenav-container">
+
+    <mat-sidenav #snav>
+      <mat-nav-list>
+        <h3> Angular </h3>
+
+        <a mat-list-item routerLink="/form-validation">
+          <mat-icon class="nav-list-icon">
+            input
+          </mat-icon>
+          Form & Validation
+        </a>
+
+        <a mat-list-item routerLink="/file">
+          <mat-icon class="nav-list-icon">
+            insert_drive_file
+          </mat-icon>
+          File
+        </a>
+ 
+        <!--<h3> Camera & Microphone </h3>
+        <a mat-list-item routerLink="/camera-microphone">
+          <mat-icon class="nav-list-icon">
+            camera_alt
+          </mat-icon>
+          Audio & Video 
+        </a>
+
+        <a mat-list-item routerLink="/top">
+          <mat-icon class="nav-list-icon">
+            videocam
+          </mat-icon> 
+          Real-time Communication 
+        </a> 
+
+        <h3> Surroundings </h3>
+
+        <a mat-list-item routerLink="/bluetooth">
+          <mat-icon class="nav-list-icon">
+            bluetooth
+          </mat-icon>
+          Bluetooth 
+        </a>
+
+        <a mat-list-item routerLink="/usb">
+          <mat-icon class="nav-list-icon">
+              usb
+          </mat-icon>
+          USB 
+        </a>
+
+
+        <h3> Device Features </h3>
+        <h3> Native Behaviors </h3>
+        <h3> Operating System </h3>
+        <h3> Input </h3>
+        <h3> Seamless Experience </h3>
+        <h3> Location & Position </h3>
+
+        <a mat-list-item routerLink="/geolocation">
+          <mat-icon class="nav-list-icon">
+            gps_fixed
+          </mat-icon>
+          Geolocation 
+        </a>
+
+        <a mat-list-item routerLink="/deviceposition">
+          <mat-icon class="nav-list-icon">
+            screen_rotation
+          </mat-icon>
+          Device Position
+        </a>
+
+        <h3> Screen & Output </h3>
+
+        <h3> Angular </h3>
+
+        <a mat-list-item routerLink="/form-validation">
+          <mat-icon class="nav-list-icon">
+            input
+          </mat-icon>
+          Form & Validation
+        </a>
+
+        <a mat-list-item routerLink="/file">
+          <mat-icon class="nav-list-icon">
+            insert_drive_file
+          </mat-icon>
+          File
+        </a>
+
+        <h3> Google API </h3>
+
+        <a mat-list-item routerLink="/googlephoto">
+          <mat-icon class="nav-list-icon">
+            photo
+          </mat-icon>
+          Google Photo
+        </a>
+
+        <h3> Other </h3>
+
+        <a mat-list-item routerLink="/calendar">
+          <mat-icon class="nav-list-icon">
+            calendar_today
+          </mat-icon>
+          Calendar
+        </a>
+
+        <a mat-list-item routerLink="/top">
+          <mat-icon class="nav-list-icon">
+            share
+          </mat-icon>
+          SNS
+        </a>
+
+        <a mat-list-item routerLink="/top">
+          <mat-icon class="nav-list-icon">
+              crop_free
+          </mat-icon>
+          QR Code 
+        </a> -->
+
+
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <ng-content></ng-content>
+
+  </mat-sidenav-container>
+  
+</div>
