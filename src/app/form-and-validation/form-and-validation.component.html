@@ -1,3 +1,102 @@
 <app-navigation>
-  <p>form-and-validation works!</p>
+  <form [formGroup]="productFormGroup">
+    <div class="outline" fxLayout="column">
+      <div fxLayout="row" fxLayoutGap="24px grid">
+
+        <!-- Column1 Row1-->
+        <div fxLayout="row" fxFlex="60" fxFlexFill fxLayoutAlign="center center">
+          <mat-card class="card">
+            <div fxLayout="column">
+
+              <div fxLayout="row">
+                <h2>Products</h2>
+              </div>
+
+              <div fxLayout="row">
+                <mat-form-field class="expansion-header-row" fxFlex="100" fxFlex.sm="100" fxFlex.xs="100">
+                  <input matInput placeholder="Total Price" value="{{ Total || 0 | number}}" readonly="readonly">
+                  <span matPrefix>¥&nbsp;</span>
+                </mat-form-field>
+              </div>
+
+
+              <div fxLayout="row">
+
+                <div fxFlex="100" formArrayName="products">
+                  <div *ngFor="let c of products.controls; let index=index; let last=last;" [formGroupName]="index" fxLayoutGap="12px grid">
+                    
+
+                    <mat-form-field fxFlex="30">
+                      <input #stateInput matInput type="text" placeholder="Product" aria-label="Number" formControlName="product" [matAutocomplete]="auto">
+                      <button mat-button *ngIf="stateInput.value" matSuffix mat-icon-button aria-label="Clear" (click)="delSelectedProduct(index)">
+                        <mat-icon>close</mat-icon>
+                      </button>
+          
+                      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option (onSelectionChange)="stateInput.value != undefined" *ngFor="let product of sampleProducts" [value]="product">
+                          {{product.productName}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+
+
+                    <div fxFlex="10" fxFlexFill fxLayoutAlign="center center">
+                      <mat-form-field class="product-form" fxFlex="100">
+                        <input matInput placeholder="Unit Price" value="{{ getUnitPrice(index) || 0 | number}}" readonly="readonly">
+                      </mat-form-field>
+                    </div>
+            
+                    <div fxFlex="10" fxFlexFill fxLayoutAlign="center center">
+                      <mat-form-field class="product-form" fxFlex="100">
+                        <input matInput placeholder="Max Number" value="{{ getmaxNumber(index) || 0 | number}}" readonly="readonly">
+                      </mat-form-field>
+                    </div>
+            
+                    <div fxFlex="25" fxFlexFill fxLayoutAlign="center center">
+                      <mat-form-field class="product-form" fxFlex="100">
+                        <input matInput placeholder="Number" type="number" formControlName="productNumber" min="1">
+                        <mat-error>{{ getErrorMessage(index) }}</mat-error>
+                      </mat-form-field>
+                    </div>
+            
+                    <div fxFlex="10" fxFlexFill *ngIf="displayRemoveIcon"fxLayoutAlign="center center">
+                      <button mat-icon-button class="product-form-del" fxFlex="10">
+                        <mat-icon (click)="delInput(index)">remove_circle_outline</mat-icon>
+                      </button>
+                    </div>
+            
+                    <div fxFlex="10" fxFlexFill *ngIf="last" fxLayoutAlign="center center">
+                      <button mat-icon-button class="product-form-del" fxFlex="10">
+                        <mat-icon (click)="addInput()">add_circle_outline</mat-icon>
+                      </button>
+                    </div>
+
+
+
+                  </div>
+                </div>
+
+              </div>
+
+
+
+
+            </div>
+          </mat-card>
+        </div>
+
+        <!-- Column1 Row2-->
+        <div fxLayout="column" fxFlex="40" fxFlexFill fxLayoutGap="24px grid">
+          <div fxLayout="row" fxFlex="100" fxLayoutAlign="center center">
+            <mat-card class="card">bbb</mat-card>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-card class="card">ccc</mat-card>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
 </app-navigation>

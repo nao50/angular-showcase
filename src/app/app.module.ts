@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // environment
 import { environment } from '../environments/environment';
@@ -15,6 +16,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 // flex-layout
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -50,6 +54,8 @@ import { FormAndValidationComponent } from './form-and-validation/form-and-valid
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     // material
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -60,6 +66,9 @@ import { FormAndValidationComponent } from './form-and-validation/form-and-valid
     MatCardModule,
     MatGridListModule,
     MatMenuModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
