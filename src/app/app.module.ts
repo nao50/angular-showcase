@@ -19,6 +19,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatTableModule } from '@angular/material/table';
+import { CdkTableModule } from '@angular/cdk/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // flex-layout
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -69,6 +72,9 @@ import { FormAndValidationComponent } from './form-and-validation/form-and-valid
     MatInputModule,
     MatFormFieldModule,
     MatAutocompleteModule,
+    MatTableModule,
+    CdkTableModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

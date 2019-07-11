@@ -30,24 +30,25 @@ export class CustomValidator {
   public static maxQuantityTotal(formArray: FormArray): ValidationResult {
     // check productNumber exist & product null case
     const arr = [];
-    for (let i = 0; i < formArray.controls.length; i++) {
-      if (formArray.controls[i].value.product) {
-        arr.push(formArray.controls[i].value);
+    for (const fa of formArray.controls) {
+      if (fa.value.product) {
+        arr.push(fa.value);
       }
     }
+
     // Aggregate same products
-    const m = new Map;
-    let productsList: Products[] = [];
-    arr.reduce(function(map, current) {
+    const m = new Map();
+    const productsList: Products[] = [];
+
+    arr.reduce((map, current) => {
       map.set(current.product, map.has(current.product) ? map.get(current.product) + current.productNumber : current.productNumber);
       return map;
     }, m).forEach(function(value, key) {
       this.push({product: key, productNumber: value});
     }, productsList);
 
-
-    for (let i = 0; i < productsList.length; i++) {
-      if (productsList[i].productNumber > productsList[i].product.maxQuantity) {
+    for (const pl of productsList) {
+      if (pl.productNumber > pl.product.maxQuantity) {
         return {totalMaxQuantityInvalid: true};
       } else {
         return null;

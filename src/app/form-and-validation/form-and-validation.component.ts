@@ -1,6 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormArray, FormGroup, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 
+import { MatTableDataSource } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
+
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
@@ -33,6 +36,7 @@ export class FormAndValidationComponent implements OnInit, AfterViewInit {
   displayRemoveIcon = false;
   formInvalid = false;
 
+  productsList: Products[] = [];
   sampleProducts: Product[] = [
     {productName: 'Apple', productCode: 'p001', price: 100, maxQuantity: 10},
     {productName: 'Orange', productCode: 'p002', price: 80, maxQuantity: 15},
@@ -40,12 +44,18 @@ export class FormAndValidationComponent implements OnInit, AfterViewInit {
     {productName: 'Pineapple', productCode: 'p004', price: 500, maxQuantity: 3},
   ];
 
+  displayedColumns: string[] = ['productName', 'price', 'productNumber', 'Subtotal'];
+  columnsToDisplay: string[] = this.displayedColumns.slice();
+  data = new MatTableDataSource(this.productsList);
+
   productFormGroup: FormGroup;
-  filteredOptions: Observable<string[]>;
+  filteredOptions: Observable<Product[]>[] = [];
+  // filteredOptions: Observable<string[]>;
 
   constructor(
     private formBuilder: FormBuilder,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -59,8 +69,25 @@ export class FormAndValidationComponent implements OnInit, AfterViewInit {
       Total: this.formBuilder.control(0, [Validators.required]),
     });
 
+    this.manageNameControl(0);
     this.formSubscribe();
   }
+
+  manageNameControl(index: number) {
+    const arrayControl = this.productFormGroup.get('products') as FormArray;
+    this.filteredOptions[index] = arrayControl.at(index).get('product').valueChanges
+      .pipe(
+      startWith<string | Product>(''),
+      map(value => typeof value === 'string' ? value : value.productName),
+      map(productName => productName ? this._filter(productName) : this.sampleProducts.slice())
+      );
+  }
+
+  private _filter(value: string): Product[] {
+    const filterValue = value.toLowerCase();
+    return this.sampleProducts.filter(option => option.productName.toLowerCase().includes(filterValue));
+  }
+
 
   formSubscribe() {
     this.productFormGroup.valueChanges.subscribe(
@@ -94,6 +121,8 @@ export class FormAndValidationComponent implements OnInit, AfterViewInit {
       product: this.formBuilder.control('', []),
       productNumber: this.formBuilder.control(1, [Validators.min(1), CustomValidator.integer]),
     }, { validators: CustomValidator.maxQuantity }));
+
+    this.manageNameControl(this.products.length - 1);
   }
 
   delInput(index) {
@@ -136,11 +165,69 @@ export class FormAndValidationComponent implements OnInit, AfterViewInit {
     } else {
       this.Total = 0;
     }
+
+    // calculate Receipt
+    const arr = [];
+    for (const p of order.products) {
+      if (p.product) {
+        arr.push(p);
+      }
+    }
+
+    const m = new Map();
+    this.productsList = [];
+
+    arr.reduce((aggr, current) => {
+      aggr.set(current.product, aggr.has(current.product) ? aggr.get(current.product) + current.productNumber : current.productNumber);
+      return aggr;
+    }, m).forEach(function(value, key) {
+      this.push({product: key, productNumber: value});
+    }, this.productsList);
+
+
+    if (!this.formInvalid) {
+      this.data = new MatTableDataSource(this.productsList);
+    } else {
+      this.data = new MatTableDataSource([]);
+    }
+  }
+
+  // TODO
+  save() {
+    localStorage.setItem('angularShowcase', JSON.stringify(this.productsList));
+    const message = 'success';
+    const action = 'save';
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
+  // TODO
+  load() {}
+
+  reset() {
+    while (this.products.length !== 0) {
+      this.products.removeAt(0);
+    }
+    this.addInput();
+  }
+
+  getTotal() {
+    if (!this.formInvalid) {
+      return this.productsList.map(t => (t.product.price * t.productNumber)).reduce((acc, value) => acc + value, 0);
+    } else {
+      return 0;
+    }
   }
 
   getErrorMessage(index: number) {
     return this.products.controls[index].get('productNumber').hasError('integerInvalid') ? 'Enter an integer value' :
     this.products.controls[index].get('productNumber').hasError('maxQuantityInvalid') ? 'Exceeds the maximum value' :
+    '' ;
+  }
+
+  getTotalErrorMessage(index: number) {
+    return this.products.hasError('totalMaxQuantityInvalid') ? 'Exceeds the total maximum value' :
     '' ;
   }
 
