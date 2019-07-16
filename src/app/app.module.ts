@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, ɵDomSanitizerImpl } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +22,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTableModule } from '@angular/material/table';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // flex-layout
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -45,6 +46,10 @@ import { AppComponent } from './app.component';
 import { TopComponent } from './top/top.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FormAndValidationComponent } from './form-and-validation/form-and-validation.component';
+import { FileComponent } from './file/file.component';
+import { UploadFileDialogComponent } from './file/upload-file-dialog';
+import { PreviewComponent } from './file/preview.component';
+import { FileDropDirective } from './directives/file-drop.directive';
 
 @NgModule({
   declarations: [
@@ -52,6 +57,10 @@ import { FormAndValidationComponent } from './form-and-validation/form-and-valid
     TopComponent,
     NavigationComponent,
     FormAndValidationComponent,
+    FileComponent,
+    UploadFileDialogComponent,
+    PreviewComponent,
+    FileDropDirective,
   ],
   imports: [
     BrowserModule,
@@ -75,8 +84,17 @@ import { FormAndValidationComponent } from './form-and-validation/form-and-valid
     MatTableModule,
     CdkTableModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
-  providers: [],
+  entryComponents: [
+    // SavePictureDialogComponent,
+    UploadFileDialogComponent,
+    PreviewComponent,
+  ],
+  providers: [
+    // { provide: ErrorHandler, useClass: RavenErrorHandler },
+    ɵDomSanitizerImpl,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

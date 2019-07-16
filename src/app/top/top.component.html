@@ -23,12 +23,12 @@
             <mat-card class="card">
 
               <mat-card-header class="card-header">
-                <mat-card-title>{{ content.title }}</mat-card-title>
+                <mat-card-title><mat-icon color="primary" class="list-icon">{{ content.icon }}</mat-icon>{{ content.title }}</mat-card-title>
               </mat-card-header>
 
               <mat-list>
                 <mat-list-item class="top-list" *ngFor="let page of content.pages" routerLink="/{{page.url}}">
-                  <mat-icon class="list-icon">{{ page.icon }}</mat-icon>
+                  <mat-icon color="primary" class="list-icon">{{ page.icon }}</mat-icon>
                   {{ page.page_title }}
                 </mat-list-item>
               </mat-list>

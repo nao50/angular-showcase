@@ -1,0 +1,41 @@
+<mat-card class="preview-card">
+  <mat-card-content>
+
+    <div fxLayout="column">
+
+      <div fxFlex="50px">
+        <div fxLayout="row" style="height: 50px">
+          <div fxFlex="15" fxFlexFill fxLayoutAlign="start center">
+            <ng-container *ngIf="_url">
+              <img [src]="_url" height="50px">
+            </ng-container>
+          </div>
+
+          <div fxFlex="20" fxFlexFill fxLayoutAlign="start center">
+            {{_filename}}
+          </div>
+          <div fxFlex="10" fxFlexFill fxLayoutAlign="start center">
+            {{_sizeUnit}}
+          </div>
+          <div fxFlex="30" fxFlexFill fxLayoutAlign="start center">
+            {{_discription}}
+          </div>
+
+          <div fxFlex="15" fxFlexFill fxLayoutAlign="end center">
+            <button mat-raised-button color="primary" (click)="download()" class="preview-button">
+              download
+            </button>
+          </div>
+          
+          <div fxFlex="10" fxFlexFill fxLayoutAlign="end center">
+            <button mat-raised-button color="warn" (click)="del()" class="preview-button">
+              delete
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </mat-card-content>
+</mat-card>

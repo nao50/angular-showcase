@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 export interface Content {
   title: string;
+  icon: string;
   pages: Page[];
 }
 export interface Page {
@@ -22,23 +23,23 @@ export class TopComponent implements OnInit {
 
   contents: Content[] = [
     {
-      title: 'Angular', pages: [
+      title: 'Angular', icon: 'priority_high', pages: [
         {icon: 'input', page_title: 'Form & Validation', url: '/form-validation'},
         {icon: 'insert_drive_file', page_title: 'File', url: '/file'},
       ]
     },
     {
-      title: '???', pages: [
+      title: 'Camera & Microphone', icon: 'priority_high', pages: [
         {icon: 'priority_high', page_title: 'TBD', url: '/top'},
       ]
     },
     {
-      title: '???', pages: [
+      title: '???', icon: 'priority_high', pages: [
         {icon: 'priority_high', page_title: 'TBD', url: '/top'},
       ]
     },
     {
-      title: '???', pages: [
+      title: '???', icon: 'priority_high', pages: [
         {icon: 'priority_high', page_title: 'TBD', url: '/top'},
       ]
     },

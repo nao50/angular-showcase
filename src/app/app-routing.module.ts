@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 // compornent
 import { TopComponent } from './top/top.component';
 import { FormAndValidationComponent } from './form-and-validation/form-and-validation.component';
+import { FileComponent } from './file/file.component';
 
 const routes: Routes = [
   {
@@ -15,13 +16,17 @@ const routes: Routes = [
     component: FormAndValidationComponent,
   },
   {
+    path: 'file',
+    component: FileComponent,
+  },
+  {
     path: '**',
     redirectTo: 'top',
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

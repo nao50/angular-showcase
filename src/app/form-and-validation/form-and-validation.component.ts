@@ -50,7 +50,6 @@ export class FormAndValidationComponent implements OnInit, AfterViewInit {
 
   productFormGroup: FormGroup;
   filteredOptions: Observable<Product[]>[] = [];
-  // filteredOptions: Observable<string[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -69,11 +68,11 @@ export class FormAndValidationComponent implements OnInit, AfterViewInit {
       Total: this.formBuilder.control(0, [Validators.required]),
     });
 
-    this.manageNameControl(0);
+    this.managedFilter(0);
     this.formSubscribe();
   }
 
-  manageNameControl(index: number) {
+  managedFilter(index: number) {
     const arrayControl = this.productFormGroup.get('products') as FormArray;
     this.filteredOptions[index] = arrayControl.at(index).get('product').valueChanges
       .pipe(
@@ -122,7 +121,7 @@ export class FormAndValidationComponent implements OnInit, AfterViewInit {
       productNumber: this.formBuilder.control(1, [Validators.min(1), CustomValidator.integer]),
     }, { validators: CustomValidator.maxQuantity }));
 
-    this.manageNameControl(this.products.length - 1);
+    this.managedFilter(this.products.length - 1);
   }
 
   delInput(index) {
