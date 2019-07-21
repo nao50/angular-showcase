@@ -18,7 +18,7 @@ export interface FileHandle {
 export class FileDropDirective {
   @Output() files: EventEmitter<FileHandle[]> = new EventEmitter();
 
-  @HostBinding('style.background') private background = '';
+  @HostBinding('style.background') public background = '';
   @HostBinding('class.is-over') public isOver: boolean;
 
   constructor(private sanitizer: DomSanitizer) { }

@@ -16,11 +16,11 @@ export class PreviewComponent implements OnInit, OnDestroy {
   private _closing = new EventEmitter<{}>();
 
   // private _filehandle: FileHandle = '';
-  private _discription = '';
-  private _url: SafeUrl = '';
-  private _size = 0;
-  private _sizeUnit = '';
-  private _filename = '';
+  imageDiscription = '';
+  imageUrl: SafeUrl = '';
+  imageSize = 0;
+  sizeUnit = '';
+  fileName = '';
   private _file: File;
 
   constructor(
@@ -58,23 +58,23 @@ export class PreviewComponent implements OnInit, OnDestroy {
     this._file = value;
   }
   public set discription(value: string) {
-    this._discription = value;
+    this.imageDiscription = value;
   }
   public set url(value: SafeResourceUrl) {
-    this._url = value;
+    this.imageUrl = value;
   }
   public set size(value: number) {
-    this._size = value;
-    if ((this._size / 1000) < 1) {
-        this._sizeUnit = this._size + ' B';
-    } else if ((this._size / 1000000) < 1) {
-        this._sizeUnit = Math.round(this._size / 1000) + ' KB';
-    } else if ((this._size / 1000000) < 1) {
-        this._sizeUnit = Math.round(this._size / 1000000) + ' MB';
+    this.imageSize = value;
+    if ((this.imageSize / 1000) < 1) {
+        this.sizeUnit = this.imageSize + ' B';
+    } else if ((this.imageSize / 1000000) < 1) {
+        this.sizeUnit = Math.round(this.imageSize / 1000) + ' KB';
+    } else if ((this.imageSize / 1000000) < 1) {
+        this.sizeUnit = Math.round(this.imageSize / 1000000) + ' MB';
     }
   }
   public set filename(value: string) {
-    this._filename = value;
+    this.fileName = value;
   }
 
   del(): void {
@@ -82,10 +82,11 @@ export class PreviewComponent implements OnInit, OnDestroy {
   }
 
   download(): void {
-    const sanitizedUrl = this._sanitizerImpl.sanitize(SecurityContext.RESOURCE_URL,  this._url);
+    const sanitizedUrl = this._sanitizerImpl.sanitize(SecurityContext.RESOURCE_URL,  this.imageUrl);
     const a = this.renderer.createElement('a') as HTMLAnchorElement;
     a.href = sanitizedUrl;
-    a.setAttribute('download', this._filename);
+    a.setAttribute('download', this.fileName);
     a.click();
   }
 }
+

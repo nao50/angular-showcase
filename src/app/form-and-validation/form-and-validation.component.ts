@@ -225,7 +225,7 @@ export class FormAndValidationComponent implements OnInit, AfterViewInit {
     '' ;
   }
 
-  getTotalErrorMessage(index: number) {
+  getTotalErrorMessage() {
     return this.products.hasError('totalMaxQuantityInvalid') ? 'Exceeds the total maximum value' :
     '' ;
   }
