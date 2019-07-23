@@ -23,7 +23,10 @@
             <mat-card class="card">
 
               <mat-card-header class="card-header">
-                <mat-card-title><mat-icon color="primary" class="list-icon">{{ content.icon }}</mat-icon>{{ content.title }}</mat-card-title>
+                <mat-card-title fxFlex="100" fxLayoutAlign="start center">
+                  <mat-icon color="primary" class="list-icon" svgIcon="{{ content.svgIcon }}">{{ content.icon }}</mat-icon>
+                  {{ content.title }}
+                </mat-card-title>
               </mat-card-header>
 
               <mat-list>

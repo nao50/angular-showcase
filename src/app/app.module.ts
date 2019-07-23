@@ -2,6 +2,7 @@ import { BrowserModule, ɵDomSanitizerImpl } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // environment
 import { environment } from '../environments/environment';
@@ -68,6 +69,7 @@ import { FileDropDirective } from './directives/file-drop.directive';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     // material
     BrowserAnimationsModule,
     MatToolbarModule,

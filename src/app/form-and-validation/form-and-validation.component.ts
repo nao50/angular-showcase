@@ -116,10 +116,11 @@ export class FormAndValidationComponent implements OnInit, AfterViewInit {
   }
 
   addInput() {
-    this.products.push(this.formBuilder.group({
-      product: this.formBuilder.control('', []),
-      productNumber: this.formBuilder.control(1, [Validators.min(1), CustomValidator.integer]),
-    }, { validators: CustomValidator.maxQuantity }));
+    this.products.push(
+      this.formBuilder.group({
+        product: this.formBuilder.control('', []),
+        productNumber: this.formBuilder.control(1, [Validators.min(1), CustomValidator.integer]),
+      }, { validators: CustomValidator.maxQuantity }));
 
     this.managedFilter(this.products.length - 1);
   }
@@ -135,8 +136,7 @@ export class FormAndValidationComponent implements OnInit, AfterViewInit {
   getUnitPrice(index: number) {
     this.unitPrice = 0;
     if (this.products.value[index].product) {
-      return this.products.value[index].product.price;
-    }
+      return this.products.value[index].product.price;    }
   }
 
   getmaxNumber(index: number) {

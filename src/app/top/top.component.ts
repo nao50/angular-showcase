@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material';
 
 export interface Content {
   title: string;
-  icon: string;
+  icon?: string;
+  svgIcon?: string;
   pages: Page[];
 }
 export interface Page {
-  icon: string;
+  icon?: string;
+  svgIcon?: string;
   page_title: string;
   url: string;
 }
@@ -23,13 +27,13 @@ export class TopComponent implements OnInit {
 
   contents: Content[] = [
     {
-      title: 'Angular', icon: 'priority_high', pages: [
+      title: 'Angular', svgIcon: 'angular', pages: [
         {icon: 'input', page_title: 'Form & Validation', url: '/form-validation'},
         {icon: 'insert_drive_file', page_title: 'File', url: '/file'},
       ]
     },
     {
-      title: 'Camera & Microphone', icon: 'priority_high', pages: [
+      title: 'Camera & Microphone', icon: 'camera_alt', pages: [
         {icon: 'priority_high', page_title: 'TBD', url: '/top'},
       ]
     },
@@ -45,7 +49,14 @@ export class TopComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor(
+    private domSanitizer: DomSanitizer,
+    private matIconRegistry: MatIconRegistry,
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      'angular',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/logo/angular.svg'));
+  }
 
   ngOnInit() {
     this.usingPlatform = window.navigator.platform;

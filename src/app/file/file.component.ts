@@ -38,8 +38,6 @@ export class FileComponent implements OnInit {
   addPreview(discription: string, filehandle: any, filename: string) {
     const componentRef = this.viewContainerRef.createComponent(this.factory);
 
-    console.log('filehandle: ', filehandle);
-
     componentRef.instance.filehandle = filehandle;
     componentRef.instance.discription = discription;
     componentRef.instance.filename = filename;
@@ -50,8 +48,8 @@ export class FileComponent implements OnInit {
   }
 
   filesDropped(files: FileHandle[]): void {
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
+    for (const f of files) {
+      const file = f;
       // Open Dialog
       const dialogRef = this.dialog.open(UploadFileDialogComponent, {
         width: '32.5rem',
@@ -72,8 +70,9 @@ export class FileComponent implements OnInit {
 
   onChangeFileInput(files: File[]): void {
     this.files = [];
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
+
+    for (const f of files) {
+      const file = f;
       const url = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file));
       this.files.push({ file, url });
 
@@ -81,14 +80,16 @@ export class FileComponent implements OnInit {
       const dialogRef = this.dialog.open(UploadFileDialogComponent, {
         width: '32.5rem',
         disableClose: true,
-        data: {file: file, url: url}
+        data: {file, url}
       });
       dialogRef.afterClosed().pipe(filter(value => value)).subscribe(
         (value) => {
           this.addPreview(value.discription, value.data, value.filename);
+          // this.files = [];
         }
       );
     }
   }
 
 }
+

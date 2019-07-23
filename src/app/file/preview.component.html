@@ -5,7 +5,8 @@
 
       <div fxFlex="50px">
         <div fxLayout="row" style="height: 50px">
-          <div fxFlex="15" fxFlexFill fxLayoutAlign="start center">
+
+          <div fxFlex="20" fxFlexFill fxLayoutAlign="start center">
             <ng-container *ngIf="imageUrl">
               <img [src]="imageUrl" height="50px">
             </ng-container>
@@ -17,19 +18,31 @@
           <div fxFlex="10" fxFlexFill fxLayoutAlign="start center">
             {{sizeUnit}}
           </div>
-          <div fxFlex="30" fxFlexFill fxLayoutAlign="start center">
+          <div fxFlex="40" fxFlexFill fxLayoutAlign="start center">
             {{imageDiscription}}
           </div>
 
-          <div fxFlex="15" fxFlexFill fxLayoutAlign="end center">
-            <button mat-raised-button color="primary" (click)="download()" class="preview-button">
-              download
+          <div fxFlex="5" fxFlexFill fxLayoutAlign="end center">
+            <button mat-mini-fab color="" (click)="edit()">
+              <mat-icon>edit</mat-icon>
             </button>
           </div>
           
-          <div fxFlex="10" fxFlexFill fxLayoutAlign="end center">
-            <button mat-raised-button color="warn" (click)="del()" class="preview-button">
-              delete
+            <div fxFlex="5" fxFlexFill fxLayoutAlign="end center">
+              <button mat-mini-fab color="primary" (click)="upload()" disabled>
+                <mat-icon>file_upload</mat-icon>
+              </button>
+            </div>
+
+          <div fxFlex="5" fxFlexFill fxLayoutAlign="end center">
+            <button mat-mini-fab color="accent" (click)="download()">
+              <mat-icon>file_download</mat-icon>
+            </button>
+          </div>
+
+          <div fxFlex="5" fxFlexFill fxLayoutAlign="end center">
+            <button mat-mini-fab color="warn" (click)="delete()">
+              <mat-icon>delete</mat-icon>
             </button>
           </div>
 
@@ -39,3 +52,4 @@
     </div>
   </mat-card-content>
 </mat-card>
+

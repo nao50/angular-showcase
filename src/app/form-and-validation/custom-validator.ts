@@ -28,6 +28,7 @@ export class CustomValidator {
 
   // Validation Total maxQuantity
   public static maxQuantityTotal(formArray: FormArray): ValidationResult {
+
     // check productNumber exist & product null case
     const arr = [];
     for (const fa of formArray.controls) {
@@ -50,8 +51,6 @@ export class CustomValidator {
     for (const pl of productsList) {
       if (pl.productNumber > pl.product.maxQuantity) {
         return {totalMaxQuantityInvalid: true};
-      } else {
-        return null;
       }
     }
 

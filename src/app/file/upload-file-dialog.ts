@@ -25,9 +25,12 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
     ) {}
 
     ngOnInit() {
+      console.log('this.data: ', this.data);
+
       if (this.data.file) {
         this.fileFormGroup.patchValue({
-          discription: '',
+          // discription: '',
+          discription: this.data.discription,
           data: this.data,
           filename: this.data.file.name
         });
@@ -43,3 +46,4 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
     }
 
 }
+

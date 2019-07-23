@@ -1,7 +1,7 @@
 <app-navigation>
 
   <div fxLayout="row wrap" fxLayoutAlign="center center">
-    <div class="upload-card-row" fxFlex="60" fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="100" fxFlex.xs="100">
+    <div class="upload-card-row" fxFlex="75" fxFlex.lg="75" fxFlex.md="75" fxFlex.sm="100" fxFlex.xs="100">
       <mat-card class="upload-card">
         <mat-card-content>
           <div fxLayout="row wrap">
@@ -21,7 +21,7 @@
                     </div>
 
                   </div>
-                  <input type="file" style="display: none" #fileInput accept="image/*" (change)="onChangeFileInput($event.target.files)" multiple/>
+                  <input type="file" style="display: none" #fileInput (click)="fileInput.value = null" value="" accept="image/*" (change)="onChangeFileInput($event.target.files)" multiple/>
                 </form>
                 
             </div>
@@ -34,14 +34,14 @@
 
 
   <div fxLayout="row wrap" fxLayoutAlign="center center">
-    <div class="preview-header-card-row" fxFlex="60" fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="100" fxFlex.xs="100">
+    <div class="preview-header-card-row" fxFlex="75" fxFlex.lg="75" fxFlex.md="75" fxFlex.sm="100" fxFlex.xs="100">
       <mat-card>
         <mat-card-content>
 
             <div fxLayout="column">
               <div fxFlex="25px">
                 <div fxLayout="row" style="height: 25px">
-                  <div fxFlex="15" fxFlexFill fxLayoutAlign="start center">
+                  <div fxFlex="20" fxFlexFill fxLayoutAlign="start center">
                     Preview
                   </div>
                   <div fxFlex="20" fxFlexFill fxLayoutAlign="start center">
@@ -50,10 +50,10 @@
                   <div fxFlex="10" fxFlexFill fxLayoutAlign="start center">
                     Size
                   </div>
-                  <div fxFlex="30" fxFlexFill fxLayoutAlign="start center">
+                  <div fxFlex="40" fxFlexFill fxLayoutAlign="start center">
                     Discription
                   </div>
-                  <div fxFlex="30" fxFlexFill fxLayoutAlign="end center">
+                  <div fxFlex="10" fxFlexFill fxLayoutAlign="end center">
                   </div>
                 </div>
               </div>
@@ -65,7 +65,7 @@
   </div>
 
   <div fxLayout="row wrap" fxLayoutAlign="center center">
-    <div class="preview-card-row" fxFlex="60" fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="100" fxFlex.xs="100">
+    <div class="preview-card-row" fxFlex="75" fxFlex.lg="75" fxFlex.md="75" fxFlex.sm="100" fxFlex.xs="100">
       <div #preview></div>
     </div>
   </div>

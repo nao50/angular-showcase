@@ -13,7 +13,7 @@ import { FileHandle } from '../directives/file-drop.directive';
   styleUrls: ['./preview.component.scss']
 })
 export class PreviewComponent implements OnInit, OnDestroy {
-  private _closing = new EventEmitter<{}>();
+  private close = new EventEmitter<{}>();
 
   // private _filehandle: FileHandle = '';
   imageDiscription = '';
@@ -21,14 +21,14 @@ export class PreviewComponent implements OnInit, OnDestroy {
   imageSize = 0;
   sizeUnit = '';
   fileName = '';
-  private _file: File;
+  imageFile: File;
 
   constructor(
     private renderer: Renderer2,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    protected _sanitizer: DomSanitizer,
-    protected _sanitizerImpl: ɵDomSanitizerImpl
+    protected sanitizer: DomSanitizer,
+    protected sanitizerImpl: ɵDomSanitizerImpl,
   ) { }
 
   ngOnInit() {
@@ -40,7 +40,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
   }
 
   public get closing(): Observable<{}> {
-    return this._closing;
+    return this.close;
   }
 
   public set filehandle(value: FileHandle) {
@@ -55,11 +55,9 @@ export class PreviewComponent implements OnInit, OnDestroy {
   //   return this.file;
   // }
   public set file(value: File) {
-    this._file = value;
+    this.imageFile = value;
   }
-  public set discription(value: string) {
-    this.imageDiscription = value;
-  }
+
   public set url(value: SafeResourceUrl) {
     this.imageUrl = value;
   }
@@ -73,16 +71,42 @@ export class PreviewComponent implements OnInit, OnDestroy {
         this.sizeUnit = Math.round(this.imageSize / 1000000) + ' MB';
     }
   }
+
+  public set discription(value: string) {
+    this.imageDiscription = value;
+  }
   public set filename(value: string) {
     this.fileName = value;
   }
 
-  del(): void {
-    this._closing.emit({});
+  edit() {
+    console.log('this.file:', this.file);
+    console.log('this.imageDiscription:', this.imageDiscription);
+    console.log('this.fileName:', this.fileName);
+    console.log('this.imageUrl:', this.imageUrl);
+
+    const dialogRef = this.dialog.open(UploadFileDialogComponent, {
+      width: '32.5rem',
+      disableClose: true,
+      // data: {file: file.file, url: file.url}
+      data: {file: this.file, discription: this.imageDiscription, filename: this.fileName}
+    });
+    dialogRef.afterClosed().pipe(filter(value => value)).subscribe(
+      (value) => {
+        console.log('value111: ', value);
+        // this.addPreview(value.discription, value.data, value.filename);
+      }
+    );
+  }
+
+  upload() {}
+
+  delete(): void {
+    this.close.emit({});
   }
 
   download(): void {
-    const sanitizedUrl = this._sanitizerImpl.sanitize(SecurityContext.RESOURCE_URL,  this.imageUrl);
+    const sanitizedUrl = this.sanitizerImpl.sanitize(SecurityContext.RESOURCE_URL,  this.imageUrl);
     const a = this.renderer.createElement('a') as HTMLAnchorElement;
     a.href = sanitizedUrl;
     a.setAttribute('download', this.fileName);

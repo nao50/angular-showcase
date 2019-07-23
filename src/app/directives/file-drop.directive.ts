@@ -21,7 +21,9 @@ export class FileDropDirective {
   @HostBinding('style.background') public background = '';
   @HostBinding('class.is-over') public isOver: boolean;
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(
+    private sanitizer: DomSanitizer
+  ) { }
 
   @HostListener('dragover', ['$event']) public onDragOver(evt: DragEvent) {
     evt.preventDefault();
@@ -44,12 +46,15 @@ export class FileDropDirective {
     this.isOver = false;
 
     const files: FileHandle[] = [];
-    for (let i = 0; i < evt.dataTransfer.files.length; i++) {
+
+    // for (let i = 0; i < evt.dataTransfer.files.length; i++) {
+    for (let i = 0, len = evt.dataTransfer.files.length; i < len; i++) {
       const file = evt.dataTransfer.files[i];
-      // const url = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file));
+
       const url = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(file));
       files.push({ file, url });
     }
+
     if (files.length > 0) {
       this.files.emit(files);
     }
