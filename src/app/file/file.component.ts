@@ -1,13 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FileHandle } from '../directives/file-drop.directive';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
+import { ComponentFactory, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 
-import { PreviewComponent } from './preview.component';
-import { ComponentFactory, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
+import { FileHandle } from '../file/filehandle';
+import { PreviewComponent } from './preview.component';
 import { UploadFileDialogComponent } from './upload-file-dialog';
 
 @Component({
@@ -35,12 +34,10 @@ export class FileComponent implements OnInit {
     this.factory = this.resolver.resolveComponentFactory(PreviewComponent);
   }
 
-  addPreview(discription: string, filehandle: any, filename: string) {
+  addPreview(fileHandle: FileHandle) {
     const componentRef = this.viewContainerRef.createComponent(this.factory);
 
-    componentRef.instance.filehandle = filehandle;
-    componentRef.instance.discription = discription;
-    componentRef.instance.filename = filename;
+    componentRef.instance.fileHandle = fileHandle;
 
     componentRef.instance.closing.subscribe(() => {
       componentRef.destroy();
@@ -54,11 +51,11 @@ export class FileComponent implements OnInit {
       const dialogRef = this.dialog.open(UploadFileDialogComponent, {
         width: '32.5rem',
         disableClose: true,
-        data: {file: file.file, url: file.url}
+        data: file
       });
       dialogRef.afterClosed().pipe(filter(value => value)).subscribe(
-        (value) => {
-          this.addPreview(value.discription, value.data, value.filename);
+        (value: FileHandle) => {
+          this.addPreview(value);
         }
       );
     }
@@ -75,17 +72,19 @@ export class FileComponent implements OnInit {
       const file = f;
       const url = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file));
       this.files.push({ file, url });
+    }
 
+    for (const f of this.files) {
+      const file = f;
       // Open Dialog
       const dialogRef = this.dialog.open(UploadFileDialogComponent, {
         width: '32.5rem',
         disableClose: true,
-        data: {file, url}
+        data: file
       });
       dialogRef.afterClosed().pipe(filter(value => value)).subscribe(
-        (value) => {
-          this.addPreview(value.discription, value.data, value.filename);
-          // this.files = [];
+        (value: FileHandle) => {
+          this.addPreview(value);
         }
       );
     }

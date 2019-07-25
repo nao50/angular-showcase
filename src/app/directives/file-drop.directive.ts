@@ -6,11 +6,7 @@ import {
   EventEmitter
 } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-
-export interface FileHandle {
-  file: File;
-  url: SafeUrl;
-}
+import { FileHandle } from '../file/filehandle';
 
 @Directive({
   selector: '[appFileDrop]'
@@ -47,7 +43,6 @@ export class FileDropDirective {
 
     const files: FileHandle[] = [];
 
-    // for (let i = 0; i < evt.dataTransfer.files.length; i++) {
     for (let i = 0, len = evt.dataTransfer.files.length; i < len; i++) {
       const file = evt.dataTransfer.files[i];
 

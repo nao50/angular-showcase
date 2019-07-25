@@ -30,16 +30,19 @@ export class TopComponent implements OnInit {
       title: 'Angular', svgIcon: 'angular', pages: [
         {icon: 'input', page_title: 'Form & Validation', url: '/form-validation'},
         {icon: 'insert_drive_file', page_title: 'File', url: '/file'},
+        {icon: 'view_quilt', page_title: 'Lean Canvas', url: '/leancanvas'}
       ]
     },
     {
       title: 'Camera & Microphone', icon: 'camera_alt', pages: [
-        {icon: 'priority_high', page_title: 'TBD', url: '/top'},
+        {icon: 'camera_alt', page_title: 'Audio & Video', url: '/camera-microphone'},
+        {icon: 'videocam', page_title: 'Real-time Communication', url: '/top'},
       ]
     },
     {
-      title: '???', icon: 'priority_high', pages: [
-        {icon: 'priority_high', page_title: 'TBD', url: '/top'},
+      title: 'Location & Position', icon: 'place', pages: [
+        {icon: 'gps_fixed', page_title: 'Geolocation', url: '/geolocation'},
+        {icon: 'screen_rotation', page_title: 'Device Position', url: '/deviceposition'},
       ]
     },
     {
