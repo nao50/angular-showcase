@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TopComponent } from './top/top.component';
 import { FormAndValidationComponent } from './form-and-validation/form-and-validation.component';
 import { FileComponent } from './file/file.component';
+import { GeolocationComponent } from './geolocation/geolocation.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'file',
     component: FileComponent,
+  },
+  {
+    path: 'geolocation',
+    component: GeolocationComponent,
   },
   {
     path: '**',

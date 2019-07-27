@@ -30,6 +30,7 @@ export class TopComponent implements OnInit {
       title: 'Angular', svgIcon: 'angular', pages: [
         {icon: 'input', page_title: 'Form & Validation', url: '/form-validation'},
         {icon: 'insert_drive_file', page_title: 'File', url: '/file'},
+        {icon: 'done_outline', page_title: 'TODO', url: '/todo'},
         {icon: 'view_quilt', page_title: 'Lean Canvas', url: '/leancanvas'}
       ]
     },

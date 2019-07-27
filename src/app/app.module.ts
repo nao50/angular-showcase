@@ -29,6 +29,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 // 3rd party (leaflet)
+
+// 3rd party (sentry)
 import * as Raven from 'raven-js';
 import { ErrorHandler } from '@angular/core';
 Raven
@@ -51,6 +53,7 @@ import { FileComponent } from './file/file.component';
 import { UploadFileDialogComponent } from './file/upload-file-dialog';
 import { PreviewComponent } from './file/preview.component';
 import { FileDropDirective } from './directives/file-drop.directive';
+import { GeolocationComponent } from './geolocation/geolocation.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,7 @@ import { FileDropDirective } from './directives/file-drop.directive';
     UploadFileDialogComponent,
     PreviewComponent,
     FileDropDirective,
+    GeolocationComponent,
   ],
   imports: [
     BrowserModule,

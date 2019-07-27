@@ -16,8 +16,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
   private close = new EventEmitter<{}>();
 
   imageDiscription = '';
-  imageUrl: SafeResourceUrl = '';
-  // imageUrl: SafeUrl = '';
+  imageUrl: SafeUrl = '';
   imageSize = 0;
   sizeUnit = '';
   fileName = '';
@@ -28,7 +27,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     private renderer: Renderer2,
     public dialog: MatDialog,
     protected sanitizer: DomSanitizer,
-    protected sanitizerImpl: ɵDomSanitizerImpl,
+    private sanitizerImpl: ɵDomSanitizerImpl,
   ) { }
 
   ngOnInit() {
@@ -92,12 +91,10 @@ export class PreviewComponent implements OnInit, OnDestroy {
   }
 
   download(): void {
-    console.log('this.imageUrl: ', this.imageUrl);
-    const sanitizedUrl = this.sanitizerImpl.sanitize(SecurityContext.RESOURCE_URL, this.imageUrl);
-    // const surl = this.sanitizer.bypassSecurityTrustUrl(this.imageUrl);
+    const safe = 'changingThisBreaksApplicationSecurity';
     const a = this.renderer.createElement('a') as HTMLAnchorElement;
 
-    a.href = sanitizedUrl;
+    a.href = this.imageUrl[safe];
 
     a.setAttribute('download', this.fileName);
     a.click();
