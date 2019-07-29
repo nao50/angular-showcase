@@ -1,3 +1,50 @@
 <app-navigation>
-  <p>geolocation works!</p>
+
+  <div fxLayout="row wrap" fxLayoutAlign="center center">
+    <div class="card" fxFlex="60" fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="100" fxFlex.xs="100">
+      <mat-card>
+        <mat-card-content>
+          <div fxLayout="row wrap">
+            <div class="map-row" fxFlex="100">
+
+              <div *ngIf="!initialize" style="width: 100%; height: 532.2px;" fxLayoutAlign="center center">
+                <mat-spinner></mat-spinner>
+              </div>
+
+              <div class="map" #map id="map" style="width: 100%; height: 532.2px;"></div>
+
+            </div>
+            <div fxFlex="100" fxLayoutAlign="center center">
+              <!-- <button mat-raised-button class="button-row" color="primary" [disabled]="loading || initDone" (click)="initMap()">Init</button> -->
+              <button mat-raised-button class="button-row" color="primary" [disabled]="!initialize || subscribeLocation" (click)="subscribeGeolocation()">Start</button>
+              <button mat-raised-button class="button-row" color="primary" [disabled]="!initialize || !subscribeLocation" (click)="unsubscribeGeolocation()">Stop</button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutAlign="center center">
+    <div class="card" fxFlex="60" fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="100" fxFlex.xs="100">
+      <mat-card>
+        <mat-card-content>
+          
+          <table mat-table [dataSource]="data" class="mat-elevation-z8">
+            <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+              <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+              <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+          </table>
+
+
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
 </app-navigation>

@@ -6,6 +6,7 @@ import { TopComponent } from './top/top.component';
 import { FormAndValidationComponent } from './form-and-validation/form-and-validation.component';
 import { FileComponent } from './file/file.component';
 import { GeolocationComponent } from './geolocation/geolocation.component';
+import { TodoComponent } from './todo/todo.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'geolocation',
     component: GeolocationComponent,
+  },
+  {
+    path: 'todo',
+    component: TodoComponent,
   },
   {
     path: '**',
