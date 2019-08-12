@@ -1,0 +1,182 @@
+<app-navigation>
+  <div class="outline" fxLayout="column">
+
+    <div fxLayout="row wrap" fxFlex="120px">
+      <div class="clock" fxFlex.xs="100" fxFlex.sm="100" fxFlex="100" fxLayoutAlign="center center" >
+        {{ time | date: 'MM/dd HH:mm:ss' }}
+      </div>
+    </div>
+
+    <!--  -->
+    <div fxLayout="row wrap">
+
+      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex="25" *ngFor="let content of contents">
+        <mat-grid-list cols="1" rowHeight="3:2">
+          <mat-grid-tile>
+            <mat-card class="card">
+              <!--  -->
+              <div fxLayout="column">
+
+              <mat-toolbar class="chartjs-toolbar" fxLayout="row" fxFlex="30px" [style.background]="content.background" [style.color]="content.color">
+                <mat-toolbar-row fxLayoutAlign="start start">
+                  <span>{{ content.title }}</span>
+                </mat-toolbar-row>
+              </mat-toolbar>
+              <!--  -->
+
+              <!-- Value -->
+              <div fxLayout="row" fxFlex="80px" fxFlexFill fxLayoutAlign="space-around strech">
+                <div fxFlex="60" fxLayoutAlign="center center">
+                  <div class="value" [style.color]="randomNumber01Color">{{ content.value || 0 }}</div>
+                </div>
+
+                <!-- Icon -->
+                <div fxFlex="40" fxLayoutAlign="start center">
+                  <mat-icon class="mat-icon">{{ content.icon }}</mat-icon>
+                </div>
+              </div>
+
+              <!-- Rate of change -->
+              <div fxLayout="row" fxFlex="30px" fxFlexFill fxLayoutAlign="start start">
+                <div fxFlex="60" fxLayoutAlign="center center">
+                  <div class="change-rate">{{ content.changeRate || 0 }}</div>
+                </div>
+              </div>
+
+              <!-- description -->
+              <div fxLayout="row" fxFlex="80px" fxFlexFill fxLayoutAlign="start start">
+                <div class="description">{{ content.description }}</div>
+              </div>
+
+              </div>
+              
+              <mat-progress-bar mode="determinate" value="40" color="warn"></mat-progress-bar>
+
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+
+    </div>
+
+
+    <!--  -->
+    <!-- <div fxLayout="row wrap">
+
+      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex="25">
+        <mat-grid-list cols="1" rowHeight="3:2">
+          <mat-grid-tile>
+            <mat-card class="card">
+              <mat-toolbar color="primary" class="chartjs-toolbar chartjs-toolbar-primary">
+                <mat-toolbar-row>
+                  <span>Custom Toolbar</span>
+                </mat-toolbar-row>
+              </mat-toolbar>
+              <mat-icon>group</mat-icon>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+
+      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex="25">
+        <mat-grid-list cols="1" rowHeight="3:2">
+          <mat-grid-tile>
+            <mat-card class="card">
+              <mat-toolbar color="primary" class="chartjs-toolbar chartjs-toolbar-purple">
+                <mat-toolbar-row>
+                  <span>Custom Toolbar</span>
+                </mat-toolbar-row>
+              </mat-toolbar>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+      
+      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex="25">
+        <mat-grid-list cols="1" rowHeight="3:2">
+          <mat-grid-tile>
+            <mat-card class="card">
+              <mat-toolbar color="primary" class="chartjs-toolbar chartjs-toolbar-pink">
+                <mat-toolbar-row>
+                  <span>Custom Toolbar</span>
+                </mat-toolbar-row>
+              </mat-toolbar>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+
+      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex="25">
+        <mat-grid-list cols="1" rowHeight="3:2">
+          <mat-grid-tile>
+            <mat-card class="card">
+              <mat-toolbar color="primary" class="chartjs-toolbar chartjs-toolbar-purple2">
+                <mat-toolbar-row>
+                  <span>Custom Toolbar</span>
+                </mat-toolbar-row>
+              </mat-toolbar>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+
+    </div> -->
+
+
+    <!--  -->
+    <div fxLayout="row wrap">
+      <div fxFlex.xs="100" fxFlex.sm="100" fxFlex="100">
+        <mat-grid-list cols="1" rowHeight="4:1">
+          <mat-grid-tile>
+            
+            <mat-card #toplinechartcard class="card">
+              <!-- <canvas #toplinechart></canvas> -->
+              <div fxLayout="row" fxFlex="100" fxFlexFill fxLayoutAlign="space-around strech">
+                <div fxFlex="20" style="background-color: #f1fac0" fxLayoutAlign="center center">column2, row2-1</div>
+                <div fxFlex="50" fxLayoutAlign="center center"><canvas #toplinechart></canvas></div>
+                <div fxFlex="20" style="background-color: #f1fac0" fxLayoutAlign="center center">column2, row2-3</div>
+              </div>
+            </mat-card>
+
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
+
+    <!--  -->
+    <div fxLayout="row wrap">
+
+      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex="33">
+        <mat-grid-list cols="1" rowHeight="3:2">
+          <mat-grid-tile>
+            <mat-card class="card">
+              <!-- <canvas #toplinechart></canvas> -->
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+
+      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex="33">
+        <mat-grid-list cols="1" rowHeight="3:2">
+          <mat-grid-tile>
+            <mat-card class="card">
+              sss
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+      
+      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex="33">
+        <mat-grid-list cols="1" rowHeight="3:2">
+          <mat-grid-tile>
+            <mat-card class="card">
+              sss
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+
+    </div>
+
+  </div>
+</app-navigation>

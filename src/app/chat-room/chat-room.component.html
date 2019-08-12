@@ -1,0 +1,65 @@
+<app-navigation>
+  <div class="outline" fxLayout="column">
+    
+    <form [formGroup]="chatFormGroup">
+
+      <div class="chat-card-container" fxLayout="row" fxLayoutAlign="center center">
+        <mat-card class="chat-card" [scrollTop]="scrollMe.scrollHeight" fxFlex="80" style="height: 75vh;">
+          <mat-card-content #scrollMe class="chat-card-content">
+            <div class="media" *ngFor="let message of messages" fxLayout="row">
+
+              <!-- Another user's message -->
+              <ng-container *ngIf="sessionID !== message.userID">
+                <div class="media-left" fxLayoutAlign="start start" fxFlex="10">
+                  <div class="icon" fxFlex="80">{{ message.userName }}</div>
+                </div>
+
+                <div class="media-body media-body-left" fxLayoutAlign="start start" fxFlex="60">
+                  <pre>{{ message.message }}</pre>
+                </div>
+
+                <small class="media-date" fxLayoutAlign="start end" fxFlex="30">{{ message.date | date:"MM/dd HH:mm" }}</small>
+              </ng-container>
+
+              <!-- Own message  -->
+              <ng-container *ngIf="sessionID == message.userID">
+                <small class="media-date" fxLayoutAlign="end end" fxFlex="30">{{ message.date | date:"MM/dd HH:mm" }}</small>
+
+                <div class="media-body media-body-right" fxLayoutAlign="end start" fxFlex="60">
+                  <pre>{{ message.message }}</pre>
+                </div>
+
+                <div class="media-right" fxLayoutAlign="end start" fxFlex="10">
+                  <div class="icon" fxFlex="80">{{ message.userName }}</div>
+                </div>
+              </ng-container>
+
+            </div>
+          </mat-card-content>
+
+        </mat-card>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-card fxFlex="80">
+          
+          <mat-form-field fxFlex="93">
+            <input fxFlex="90" matInput #message maxlength="256" placeholder="Message" formControlName="message" (keyup.enter)="postMessage()">
+            <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+          </mat-form-field>
+
+          <button mat-icon-button>
+            <mat-icon class="mat-message-icon">attach_file</mat-icon>
+          </button>
+
+          <button mat-icon-button>
+            <mat-icon class="mat-message-icon">sentiment_very_satisfied</mat-icon>
+          </button>
+
+        </mat-card>
+      </div>
+
+    </form>
+
+  </div>
+</app-navigation>

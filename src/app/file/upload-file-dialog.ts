@@ -9,38 +9,38 @@ import { FileHandle } from '../file/filehandle';
     selector: 'app-upload-file-dialog',
     templateUrl: 'upload-file-dialog.html',
     styleUrls: ['./upload-file-dialog.scss']
-  })
-  export class UploadFileDialogComponent implements OnInit {
-    fileFormGroup = this.formBuilder.group({
-      discription: [''],
-      filename: ['', [Validators.required]],
-    });
+})
 
-    constructor(
-      private formBuilder: FormBuilder,
-      // private renderer: Renderer2,
-      public dialogRef: MatDialogRef<UploadFileDialogComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: FileHandle
-    ) {}
+export class UploadFileDialogComponent implements OnInit {
+  fileFormGroup = this.formBuilder.group({
+    discription: [''],
+    filename: ['', [Validators.required]],
+  });
 
-    ngOnInit() {
-      if (this.data.file) {
-        this.fileFormGroup.patchValue({
-          discription: this.data.discription,
-          filename: this.data.file.name,
-        });
-      }
+  constructor(
+    private formBuilder: FormBuilder,
+    // private renderer: Renderer2,
+    public dialogRef: MatDialogRef<UploadFileDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: FileHandle
+  ) {}
+
+  ngOnInit() {
+    if (this.data.file) {
+      this.fileFormGroup.patchValue({
+        discription: this.data.discription,
+        filename: this.data.file.name,
+      });
     }
+  }
 
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
-    uploadFile() {
-      this.data.discription = this.fileFormGroup.value.discription;
+  uploadFile() {
+    this.data.discription = this.fileFormGroup.value.discription;
 
-      this.dialogRef.close(this.data);
-    }
-
+    this.dialogRef.close(this.data);
+  }
 }
 

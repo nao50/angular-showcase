@@ -1,0 +1,26 @@
+<form [formGroup]="chatroomFormGroup">
+  <h1 mat-dialog-title>Create Chat Room</h1>
+  <div mat-dialog-content>
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-icon fxFlex="8">chat</mat-icon>
+      <mat-form-field fxFlex="90" fxFlexFill>
+        <input matInput formControlName="name" placeholder="Chat Room Name">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-icon fxFlex="8">list_alt</mat-icon>
+      <mat-form-field fxFlex="90" fxFlexFill>
+        <input matInput formControlName="discription" placeholder="Chat Room Discription">  
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div class="dialog-action-row" mat-dialog-actions fxLayout="row" fxLayoutAlign="center center">
+    <button mat-flat-button color="warn" (click)="onNoClick()">Cansel</button>
+    <span fxFlex="5"></span>
+    <button mat-flat-button color="primary" (click)="create()" [disabled]="chatroomFormGroup.invalid">Create</button>
+  </div>
+</form>

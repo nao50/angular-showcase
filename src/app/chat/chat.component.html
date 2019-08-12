@@ -1,0 +1,28 @@
+<app-navigation>
+  <div class="outline" fxLayout="column">
+
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <button mat-flat-button color="primary" (click)="openCreateChatroomDialog()">
+      <mat-icon>add</mat-icon>
+      <span>Create Chat Room</span>
+    </button>
+
+    <div fxLayoutAlign="center center" fxFlex="70">
+      <span>Your Session ID: {{ sessionID }}</span>
+    </div>
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutAlign="center center" *ngFor="let room of roomList;">
+    <div class="room-card-container" fxFlex="70">
+      <mat-card class="room-card" routerLink="/chat/{{room.roomID}}">
+        <mat-card-title>{{ room.roomID }}</mat-card-title>
+        <mat-card-subtitle>{{ room.discription }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ room.time | date:"MM/dd HH:mm"}}</mat-card-subtitle>
+        <mat-card-subtitle>{{ room.existclients | json }}</mat-card-subtitle>
+      </mat-card>
+    </div>
+  </div>
+
+
+  </div>
+</app-navigation>

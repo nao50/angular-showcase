@@ -146,7 +146,6 @@ export class GeolocationComponent implements OnInit, AfterViewInit, OnDestroy {
 
       }
     }
-
   }
 
 }

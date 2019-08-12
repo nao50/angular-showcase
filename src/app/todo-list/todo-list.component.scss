@@ -2,6 +2,17 @@
     padding-top: 48px;
 }
 
+.example-list {
+    width: 500px;
+    max-width: 100%;
+    border: solid 1px #ccc;
+    min-height: 60px;
+    display: block;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
 .add-container {
     -webkit-transition-duration: 200ms;
     transition-duration: 200ms;

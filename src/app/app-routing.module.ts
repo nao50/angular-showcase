@@ -6,7 +6,11 @@ import { TopComponent } from './top/top.component';
 import { FormAndValidationComponent } from './form-and-validation/form-and-validation.component';
 import { FileComponent } from './file/file.component';
 import { GeolocationComponent } from './geolocation/geolocation.component';
-import { TodoComponent } from './todo/todo.component';
+
+import { TodoListComponent } from './todo-list/todo-list.component';
+import { ChatComponent } from './chat/chat.component';
+import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { ChartjsComponent } from './chartjs/chartjs.component';
 
 const routes: Routes = [
   {
@@ -26,8 +30,20 @@ const routes: Routes = [
     component: GeolocationComponent,
   },
   {
-    path: 'todo',
-    component: TodoComponent,
+    path: 'todo-list',
+    component: TodoListComponent,
+  },
+  {
+    path: 'chat',
+    component: ChatComponent,
+  },
+  {
+    path: 'chat/:roomid',
+    component: ChatRoomComponent,
+  },
+  {
+    path: 'chartjs',
+    component: ChartjsComponent,
   },
   {
     path: '**',

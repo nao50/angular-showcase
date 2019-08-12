@@ -3,7 +3,7 @@ import { ComponentFactory, ComponentFactoryResolver, ViewContainerRef } from '@a
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import { FileHandle } from '../file/filehandle';
 import { PreviewComponent } from './preview.component';

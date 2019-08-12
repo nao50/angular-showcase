@@ -26,6 +26,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // flex-layout
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -71,7 +73,11 @@ import { UploadFileDialogComponent } from './file/upload-file-dialog';
 import { PreviewComponent } from './file/preview.component';
 import { FileDropDirective } from './directives/file-drop.directive';
 import { GeolocationComponent } from './geolocation/geolocation.component';
-import { TodoComponent } from './todo/todo.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
+import { ChatComponent } from './chat/chat.component';
+import { CreateChatroomDialogComponent } from './chat/create-chatroom-dialog';
+import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { ChartjsComponent } from './chartjs/chartjs.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +90,11 @@ import { TodoComponent } from './todo/todo.component';
     PreviewComponent,
     FileDropDirective,
     GeolocationComponent,
-    TodoComponent,
+    TodoListComponent,
+    ChatComponent,
+    CreateChatroomDialogComponent,
+    ChatRoomComponent,
+    ChartjsComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,11 +122,14 @@ import { TodoComponent } from './todo/todo.component';
     MatDialogModule,
     MatProgressSpinnerModule,
     DragDropModule,
+    ScrollingModule,
+    MatProgressBarModule,
   ],
   entryComponents: [
     // SavePictureDialogComponent,
     UploadFileDialogComponent,
     PreviewComponent,
+    CreateChatroomDialogComponent,
   ],
   providers: [
     // { provide: ErrorHandler, useClass: RavenErrorHandler },

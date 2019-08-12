@@ -1,0 +1,69 @@
+<app-navigation>
+
+  <div  fxLayout="row wrap" fxLayoutAlign="center center">
+    <div class="card-row" fxFlex="55" fxFlex.lg="55" fxFlex.md="55" fxFlex.sm="100" fxFlex.xs="100">
+
+      <mat-card>
+        <mat-card-content>
+          <div fxLayout="column">
+
+            <div fxLayout="row">
+
+              <div fxFlex="90" fxFlexFill fxLayoutAlign="start center" class="add-container">
+                <div fxFlex="15" fxFlex.gt-sm="8" fxFlexFill fxLayoutAlign="start center">
+                  <button mat-icon-button color="primary" aria-label="Add TODO column" fxLayoutAlign="center center">
+                    <mat-icon fxLayoutAlign="center center">add</mat-icon>
+                  </button>
+                </div>
+
+                <div fxFlex="80" fxFlexFill fxLayoutAlign="start center">タスクを追加する</div>
+              </div>
+
+              <div fxFlex="10" fxFlexFill fxLayoutAlign="end center">
+                <button mat-icon-button [mat-menu-trigger-for]="todoMenu" fxLayoutAlign="center center">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+
+                <mat-menu xPosition="before" y-position="after" #todoMenu="matMenu" [overlapTrigger]="false">
+                  <button mat-menu-item>
+                    <mat-icon>dialpad</mat-icon>
+                    <span>Redial</span>
+                  </button>
+                  <button mat-menu-item disabled>
+                    <mat-icon>voicemail</mat-icon>
+                    <span>Check voice mail</span>
+                  </button>
+                  <button mat-menu-item>
+                    <mat-icon>notifications_off</mat-icon>
+                    <span>Disable alerts</span>
+                  </button>
+                </mat-menu>
+
+              </div>
+              
+
+            </div>
+            
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  
+  <div  fxLayout="row wrap" fxLayoutAlign="center center">
+    <div class="example-list" fxFlex="55" fxFlex.lg="55" fxFlex.md="55" fxFlex.sm="100" fxFlex.xs="100" (cdkDropListDropped)="drop($event)" cdkDropList>
+
+      <mat-card class="draggable-box" *ngFor="let movie of movies" cdkDrag>
+        <mat-card-content>
+            {{movie}}
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+  </div>
+
+
+</app-navigation>
+
+

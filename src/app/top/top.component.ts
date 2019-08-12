@@ -30,12 +30,13 @@ export class TopComponent implements OnInit {
       title: 'Angular', svgIcon: 'angular', pages: [
         {icon: 'input', page_title: 'Form & Validation', url: '/form-validation'},
         {icon: 'insert_drive_file', page_title: 'File', url: '/file'},
-        {icon: 'done_outline', page_title: 'TODO', url: '/todo'}
+        {icon: 'done_outline', page_title: 'TODO', url: '/todo-list'}
       ]
     },
     {
       title: 'Camera & Microphone', icon: 'camera_alt', pages: [
         {icon: 'camera_alt', page_title: 'Audio & Video', url: '/camera-microphone'},
+        {icon: 'chat', page_title: 'Text Chat', url: '/chat'},
         {icon: 'videocam', page_title: 'Real-time Communication', url: '/top'},
       ]
     },
@@ -43,6 +44,19 @@ export class TopComponent implements OnInit {
       title: 'Location & Position', icon: 'place', pages: [
         {icon: 'gps_fixed', page_title: 'Geolocation', url: '/geolocation'},
         {icon: 'screen_rotation', page_title: 'Device Position', url: '/deviceposition'},
+      ]
+    },
+    {
+      title: 'chart', icon: 'insert_chart_outlined', pages: [
+        {icon: 'bar_chart', page_title: 'Chart.js', url: '/chartjs'},
+        {icon: 'show_chart', page_title: 'Realtime chart', url: '/top'},
+      ]
+    },
+    {
+      title: 'Google App', svgIcon: 'google', pages: [
+        {icon: 'calendar_today', page_title: 'Calendar', url: '/top'},
+        {icon: 'mail_outline', page_title: 'Mail', url: '/top'},
+        {icon: 'map', page_title: 'Map', url: '/top'},
       ]
     },
     {
@@ -59,6 +73,9 @@ export class TopComponent implements OnInit {
     this.matIconRegistry.addSvgIcon(
       'angular',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/logo/angular.svg'));
+    this.matIconRegistry.addSvgIcon(
+      'google',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/logo/google.svg'));
   }
 
   ngOnInit() {
