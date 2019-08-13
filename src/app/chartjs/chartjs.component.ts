@@ -49,7 +49,7 @@ export class ChartjsComponent implements OnInit, OnDestroy {
 
     this.chartService.subjectdata01();
 
-    this.subscription = this.chartService.data01State.subscribe(
+    this.subscription = this.chartService.subjectdata01().subscribe(
       (value: number) => {
         // Get random number
         this.randomNumber01 = value;
@@ -87,7 +87,9 @@ export class ChartjsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     clearInterval(this.timer);
     if (this.subscription) {
+      console.log('this.subscription', this.subscription);
       this.subscription.unsubscribe();
+      console.log('this.subscription', this.subscription);
     }
   }
 
