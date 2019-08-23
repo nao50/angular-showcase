@@ -12,7 +12,7 @@ import { CreateChatroom } from './chat';
 })
 export class CreateChatroomDialogComponent implements OnInit {
   chatroomFormGroup = this.formBuilder.group({
-    name: ['', [Validators.required]],
+    roomName: ['', [Validators.required]],
     discription: [''],
   });
 

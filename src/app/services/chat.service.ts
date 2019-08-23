@@ -25,10 +25,9 @@ export class ChatService {
     );
   }
 
-  // serve() {
-  serve(roomid: string, userID: string): WebSocketSubject<MessageEvent> {
+  serve(roomID: string, userID: string): WebSocketSubject<MessageEvent> {
     return webSocket({
-      url: `ws://localhost:8080/ws/${roomid}?userID=${userID}`,
+      url: `ws://localhost:8080/ws/${roomID}?userID=${userID}`,
       deserializer: message => {
         return message;
       }
@@ -45,7 +44,7 @@ export class ChatService {
     };
     return this.http.post<string[]>(
       url,
-      JSON.stringify({ 'name': name, 'discription': description }),
+      JSON.stringify({ 'roomName': name, 'discription': description }),
       httpOptions
     );
   }
@@ -59,6 +58,7 @@ export class ChatService {
       catchError(this.handleError),
     );
   }
+
   // getChatroomList(): Observable<HttpResponse<string[]>> {
   //   const url = 'http://localhost:8080/rooms';
 

@@ -29,19 +29,22 @@
 }
 
 ////////////////////////// 
-.chartjs-toolbar {
-    max-height: 30px;
-    min-height: 30px;
+// .chartjs-toolbar {
+//     max-height: 30px;
+//     min-height: 30px;
+// }
+.chartjs-toolbar-top {
+    font-size: 28px;
+}
+.chartjs-toolbar-top-row {
+    height: 30px;
 }
 
-.chartjs-toolbar-purple {
-    background: #673ab7;
+.chartjs-toolbar-hooter {
+    bottom: 0px;
+    position: absolute;
+    font-size: 28px;
 }
-
-.chartjs-toolbar-pink {
-    background: #e91e63;
-}
-
-.chartjs-toolbar-purple2 {
-    background: #9c27b0;
+.chartjs-toolbar-hooter-row {
+    height: 30px;
 }

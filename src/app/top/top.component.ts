@@ -30,7 +30,8 @@ export class TopComponent implements OnInit {
       title: 'Angular', svgIcon: 'angular', pages: [
         {icon: 'input', page_title: 'Form & Validation', url: '/form-validation'},
         {icon: 'insert_drive_file', page_title: 'File', url: '/file'},
-        {icon: 'done_outline', page_title: 'TODO', url: '/todo-list'}
+        {icon: 'done_outline', page_title: 'TODO', url: '/todo-list'},
+        {icon: 'http', page_title: 'HttpClient', url: '/httpClient'}
       ]
     },
     {
@@ -54,7 +55,7 @@ export class TopComponent implements OnInit {
     },
     {
       title: 'Google App', svgIcon: 'google', pages: [
-        {icon: 'calendar_today', page_title: 'Calendar', url: '/top'},
+        {icon: 'calendar_today', page_title: 'Calendar', url: '/calendar'},
         {icon: 'mail_outline', page_title: 'Mail', url: '/top'},
         {icon: 'map', page_title: 'Map', url: '/top'},
       ]

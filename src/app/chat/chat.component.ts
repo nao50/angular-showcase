@@ -73,7 +73,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().pipe(filter(value => value)).subscribe(
       (value: CreateChatroom) => {
-        this.chatService.createChatroom(value.name, value.discription)
+        this.chatService.createChatroom(value.roomName, value.discription)
         .subscribe(
           result => {
             console.log(result);

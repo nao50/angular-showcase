@@ -1,0 +1,42 @@
+<app-navigation>
+  <!-- <div *ngFor="let pokemon of pokemonJSON;">
+    {{ pokemon.name.japanese }}
+  </div> -->
+
+  <div class="outline" fxLayout="column">
+
+    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+      <div fxFlex.xs="100" fxFlex.sm="38" fxFlex.md="19" fxFlex.lg="12" fxFlex.xl="8" *ngFor="let pokemon of pokemonJSON">
+        <mat-grid-list cols="1" rowHeight="3:3">
+          <mat-grid-tile>
+            
+            <mat-card class="card">
+
+              <mat-card-header class="card-header">
+                <mat-card-title fxFlex="100" fxLayoutAlign="start center">
+                  <!-- <mat-icon color="primary" class="list-icon" svgIcon="{{ content.svgIcon }}">{{ content.icon }}</mat-icon> -->
+                  {{ pokemon.name.japanese }}
+                  {{ toTripleDigit(pokemon.id) }}
+                </mat-card-title>
+              </mat-card-header>
+
+              <!-- <img mat-card-image class="card-image" src="https://raw.githubusercontent.com/naoyamaguchi/pokemon.json/master/images/{{ toTripleDigit(pokemon.id) }}.png" alt="Pokemon images"> -->
+              <img mat-card-image class="card-image" src="https://raw.githubusercontent.com/naoyamaguchi/pokemon.json/master/thumbnails/{{ toTripleDigit(pokemon.id) }}.png" alt="Pokemon images">
+
+              <!-- <mat-list>
+                <mat-list-item class="top-list" *ngFor="let page of content.pages" routerLink="/{{page.url}}">
+                  <mat-icon color="primary" class="list-icon">{{ page.icon }}</mat-icon>
+                  {{ page.page_title }}
+                </mat-list-item>
+              </mat-list> -->
+
+            </mat-card>
+
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
+
+  </div>
+
+</app-navigation>

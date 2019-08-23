@@ -11,6 +11,8 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ChartjsComponent } from './chartjs/chartjs.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { HttpClientComponent } from './http-client/http-client.component';
 
 const routes: Routes = [
   {
@@ -44,6 +46,14 @@ const routes: Routes = [
   {
     path: 'chartjs',
     component: ChartjsComponent,
+  },
+  {
+    path: 'calendar',
+    component: CalendarComponent,
+  },
+  {
+    path: 'httpClient',
+    component: HttpClientComponent,
   },
   {
     path: '**',

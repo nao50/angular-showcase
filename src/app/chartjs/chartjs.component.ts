@@ -6,13 +6,20 @@ import { ChartService } from '../services/chart.service';
 
 export interface ChartContent {
   background: string;
-  color: string;
   title: string;
+  titleColor: string;
   icon?: string;
   svgIcon?: string;
   value: number;
+  valueColor: string;
   changeRate: number;
+  changeRateColor: string;
   description: string;
+}
+
+export interface Data01 {
+  x: number;
+  y: number;
 }
 
 @Component({
@@ -27,18 +34,25 @@ export class ChartjsComponent implements OnInit, OnDestroy {
   randomNumber01Color: string;
   changeRate01: number;
 
+  // data01: Data01;
+  dataList01: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  data01: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  dataList02: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  data02: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
   contents: ChartContent[] = [
-    {background: '#3f51b5', color: '#fff', title: 'Unique Users', icon: 'group', value: 0, changeRate: 0, description: 'aaa'},
-    {background: '#673ab7', color: '#fff', title: 'Sessions', icon: 'forum', value: 241, changeRate: 0, description: 'bbb'},
-    {background: '#e91e63', color: '#fff', title: 'Bounce Rate', icon: 'keyboard_return', value: 52, changeRate: 0, description: 'ccc'},
-    {background: '#9c27b0', color: '#fff', title: 'Session Duration', icon: 'alarm', value: 159, changeRate: 0, description: 'ddd'},
+    {background: '#3f51b5', titleColor: '#fff', title: 'Unique Users', icon: 'group', value: 0, valueColor: 'black', changeRate: 0, changeRateColor: 'black', description: 'aaa'},
+    {background: '#673ab7', titleColor: '#fff', title: 'Sessions', icon: 'forum', value: 241, valueColor: 'black', changeRate: 0, changeRateColor: 'black', description: 'bbb'},
+    {background: '#e91e63', titleColor: '#fff', title: 'Bounce Rate', icon: 'keyboard_return', value: 52, valueColor: 'black', changeRate: 0, changeRateColor: 'black', description: 'ccc'},
+    {background: '#9c27b0', titleColor: '#fff', title: 'Session Duration', icon: 'alarm', value: 159, valueColor: 'black', changeRate: 0, changeRateColor: 'black', description: 'ddd'},
   ];
 
   context01: CanvasRenderingContext2D;
   @ViewChild('toplinechart', {static: true}) toplinechart: ElementRef;
 
   time = new Date();
-  timer: NodeJS.Timer;
+  // timer: NodeJS.Timer;
+  timer: any;
 
   constructor(
     private chartService: ChartService,
@@ -47,37 +61,40 @@ export class ChartjsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.timer = setInterval(() => this.time = new Date(), 1000);
 
-    this.chartService.subjectdata01();
-
-    this.subscription = this.chartService.subjectdata01().subscribe(
+    this.subscription = this.chartService.subjectdata0().subscribe(
       (value: number) => {
-        // Get random number
-        this.randomNumber01 = value;
-
-        if (this.randomNumber01 < -25) {
-          this.randomNumber01Color = 'red';
-        } else if (-25 < this.randomNumber01 && 25 > this.randomNumber01) {
-          this.randomNumber01Color = 'black';
-        } else if (this.randomNumber01 > 25) {
-          this.randomNumber01Color = 'blue';
-        }
-
-        // calcurate rate
-        if (this.randomNumber01List.length < 2) {
-          this.randomNumber01List.push(this.randomNumber01);
-        } else {
-          this.randomNumber01List.shift();
-          this.randomNumber01List.push(this.randomNumber01);
-        }
-        this.changeRate01 = Math.round(((this.randomNumber01List[0] / this.randomNumber01List[1]) - 1) * 100);
-
-        //
-        this.contents = [
-          {background: '#3f51b5', color: '#fff', title: 'Unique Users', icon: 'group', value: this.randomNumber01, changeRate: this.changeRate01, description: 'aaa'},
-          {background: '#673ab7', color: '#fff', title: 'Sessions', icon: 'forum', value: 241, changeRate: 0, description: 'bbb'},
-          {background: '#e91e63', color: '#fff', title: 'Bounce Rate', icon: 'keyboard_return', value: 52, changeRate: 0, description: 'ccc'},
-          {background: '#9c27b0', color: '#fff', title: 'Session Duration', icon: 'alarm', value: 159, changeRate: 0, description: 'ddd'},
-        ];
+        this.getData01(value);
+        this.drawTopLineChart();
+        this.contents[0].value = value;
+        this.contents[0].valueColor = this.decideColor(value);
+        this.contents[0].changeRate = this.getChangeRate(value);
+        this.contents[0].changeRateColor = this.decideColor(this.contents[0].changeRate);
+      }
+    );
+    this.subscription = this.chartService.subjectdata1().subscribe(
+      (value: number) => {
+        this.getData02(value);
+        // this.drawTopLineChart();
+        this.contents[1].value = value;
+        this.contents[1].valueColor = this.decideColor(value);
+        this.contents[1].changeRate = this.getChangeRate(value);
+        this.contents[1].changeRateColor = this.decideColor(this.contents[1].changeRate);
+      }
+    );
+    this.subscription = this.chartService.subjectdata2().subscribe(
+      (value: number) => {
+        this.contents[2].value = value;
+        this.contents[2].valueColor = this.decideColor(value);
+        this.contents[2].changeRate = this.getChangeRate(value);
+        this.contents[2].changeRateColor = this.decideColor(this.contents[2].changeRate);
+      }
+    );
+    this.subscription = this.chartService.subjectdata3().subscribe(
+      (value: number) => {
+        this.contents[3].value = value;
+        this.contents[3].valueColor = this.decideColor(value);
+        this.contents[3].changeRate = this.getChangeRate(value);
+        this.contents[3].changeRateColor = this.decideColor(this.contents[3].changeRate);
       }
     );
 
@@ -87,10 +104,47 @@ export class ChartjsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     clearInterval(this.timer);
     if (this.subscription) {
-      console.log('this.subscription', this.subscription);
       this.subscription.unsubscribe();
-      console.log('this.subscription', this.subscription);
     }
+  }
+
+  decideColor(n: number): string {
+    if (n < -25) {
+      return 'red';
+    } else if ( -25 < n && 25 > n ) {
+      return 'black';
+    } else if ( n > 25 ) {
+      return 'blue';
+    }
+  }
+
+  getChangeRate(n: number): number {
+    if (this.randomNumber01List.length < 2) {
+      this.randomNumber01List.push(n);
+    } else {
+      this.randomNumber01List.shift();
+      this.randomNumber01List.push(n);
+    }
+    return Math.round(((this.randomNumber01List[0] / this.randomNumber01List[1]) - 1) * 100);
+  }
+
+  getData01(n: number): number[] {
+    if (this.dataList01.length < 11) {
+      this.dataList01.push(n);
+    } else {
+      this.dataList01.shift();
+      this.dataList01.push(n);
+    }
+    return this.dataList01;
+  }
+  getData02(n: number): number[] {
+    if (this.dataList02.length < 11) {
+      this.dataList02.push(n);
+    } else {
+      this.dataList02.shift();
+      this.dataList02.push(n);
+    }
+    return this.dataList02;
   }
 
   drawTopLineChart() {
@@ -108,15 +162,17 @@ export class ChartjsComponent implements OnInit, OnDestroy {
           pointRadius: 0,
           fill: true,
           data: [
-            { x: 0, y: 2 },
-            { x: 1, y: 1 },
-            { x: 2, y: 2.5 },
-            { x: 3, y: 5 },
-            { x: 4, y: 3 },
-            { x: 5, y: 4 },
-            { x: 6, y: 9 },
-            { x: 7, y: 7 },
-            { x: 8, y: 12 },
+            { x: 0, y: this.dataList01[0] },
+            { x: 1, y: this.dataList01[1] },
+            { x: 2, y: this.dataList01[2] },
+            { x: 3, y: this.dataList01[3] },
+            { x: 4, y: this.dataList01[4] },
+            { x: 5, y: this.dataList01[5] },
+            { x: 6, y: this.dataList01[6] },
+            { x: 7, y: this.dataList01[7] },
+            { x: 8, y: this.dataList01[8] },
+            { x: 9, y: this.dataList01[9] },
+            { x: 10, y: this.dataList01[10] },
           ],
         }, {
           label: 'Data02',
@@ -125,19 +181,24 @@ export class ChartjsComponent implements OnInit, OnDestroy {
           pointRadius: 0,
           fill: true,
           data: [
-            { x: 0, y: 1 },
-            { x: 1, y: 4 },
-            { x: 2, y: 8 },
-            { x: 3, y: 12 },
-            { x: 4, y: 1 },
-            { x: 5, y: 5 },
-            { x: 6, y: 2 },
-            { x: 7, y: 3 },
-            { x: 8, y: 1 },
+            { x: 0, y: this.dataList02[0] },
+            { x: 1, y: this.dataList02[1] },
+            { x: 2, y: this.dataList02[2] },
+            { x: 3, y: this.dataList02[3] },
+            { x: 4, y: this.dataList02[4] },
+            { x: 5, y: this.dataList02[5] },
+            { x: 6, y: this.dataList02[6] },
+            { x: 7, y: this.dataList02[7] },
+            { x: 8, y: this.dataList02[8] },
+            { x: 9, y: this.dataList02[9] },
+            { x: 10, y: this.dataList02[10] },
           ],
         }]
       },
       options: {
+        animation: {
+          duration: 0
+        },
         responsive: true,
         maintainAspectRatio: true,
         tooltips: {
@@ -145,7 +206,8 @@ export class ChartjsComponent implements OnInit, OnDestroy {
           intersect: false,
         },
         title: {
-          display: true,
+          // display: true,
+          display: false,
           text: 'Angular & Chart.js'
         },
         scales: {

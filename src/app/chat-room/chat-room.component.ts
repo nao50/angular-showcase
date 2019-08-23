@@ -47,8 +47,8 @@ export class ChatRoomComponent implements OnInit {
       this.sessionID = JSON.parse(localStorage.getItem('userID'));
     }
 
-    const roomid = this.activatedRoute.snapshot.paramMap.get('roomid');
-    this.subject = this.chatService.serve(roomid, this.sessionID);
+    const roomID = this.activatedRoute.snapshot.paramMap.get('roomid');
+    this.subject = this.chatService.serve(roomID, this.sessionID);
     this.subject.subscribe(
       (message: MessageEvent) => {
         this.message = JSON.parse(message.data) as ChatMessage;
@@ -59,11 +59,12 @@ export class ChatRoomComponent implements OnInit {
           this.router.navigate(['/chat']);
         }
         if (err.type === 'close' ) {
-          if (this.message) {
-            // TODO
-            this.message.message = 'This room is closed!';
-            this.messages.push(this.message);
-          }
+          this.router.navigate(['/chat']);
+          // if (this.message) {
+          //   // TODO
+          //   this.message.message = 'This room is closed!';
+          //   this.messages.push(this.message);
+          // }
         }
       }, () => {
         console.log('complete');

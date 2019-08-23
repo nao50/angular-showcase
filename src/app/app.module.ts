@@ -28,6 +28,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 // flex-layout
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -78,6 +80,8 @@ import { ChatComponent } from './chat/chat.component';
 import { CreateChatroomDialogComponent } from './chat/create-chatroom-dialog';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ChartjsComponent } from './chartjs/chartjs.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { HttpClientComponent } from './http-client/http-client.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +99,8 @@ import { ChartjsComponent } from './chartjs/chartjs.component';
     CreateChatroomDialogComponent,
     ChatRoomComponent,
     ChartjsComponent,
+    CalendarComponent,
+    HttpClientComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,6 +130,8 @@ import { ChartjsComponent } from './chartjs/chartjs.component';
     DragDropModule,
     ScrollingModule,
     MatProgressBarModule,
+    MatSelectModule,
+    MatDatepickerModule,
   ],
   entryComponents: [
     // SavePictureDialogComponent,

@@ -14,43 +14,45 @@
         <mat-grid-list cols="1" rowHeight="3:2">
           <mat-grid-tile>
             <mat-card class="card">
-              <!--  -->
               <div fxLayout="column">
 
-              <mat-toolbar class="chartjs-toolbar" fxLayout="row" fxFlex="30px" [style.background]="content.background" [style.color]="content.color">
-                <mat-toolbar-row fxLayoutAlign="start start">
-                  <span>{{ content.title }}</span>
-                </mat-toolbar-row>
-              </mat-toolbar>
-              <!--  -->
+                <!-- toolbar -->
+                <mat-toolbar class="chartjs-toolbar-top" fxLayout="row" fxFlex="30px" [style.background]="content.background" [style.color]="content.titleColor">
+                  <mat-toolbar-row class="chartjs-toolbar-top-row" fxLayoutAlign="start center">
+                    <span>{{ content.title }}</span>
+                  </mat-toolbar-row>
+                </mat-toolbar>
 
-              <!-- Value -->
-              <div fxLayout="row" fxFlex="80px" fxFlexFill fxLayoutAlign="space-around strech">
-                <div fxFlex="60" fxLayoutAlign="center center">
-                  <div class="value" [style.color]="randomNumber01Color">{{ content.value || 0 }}</div>
+                <!-- Value -->
+                <div fxLayout="row" fxFlex="100px" fxFlexFill fxLayoutAlign="space-around strech">
+                  <div fxFlex="60" fxLayoutAlign="center center">
+                    <div class="value" [style.color]="content.valueColor">{{ content.value || 0 }}</div>
+                  </div>
+
+                  <!-- Icon -->
+                  <div fxFlex="40" fxLayoutAlign="start center">
+                    <mat-icon class="mat-icon">{{ content.icon }}</mat-icon>
+                  </div>
                 </div>
 
-                <!-- Icon -->
-                <div fxFlex="40" fxLayoutAlign="start center">
-                  <mat-icon class="mat-icon">{{ content.icon }}</mat-icon>
+                <!-- Rate of change -->
+                <div fxLayout="row" fxFlex="50px" fxFlexFill fxLayoutAlign="start start">
+                  <div fxFlex="60" fxLayoutAlign="center center">
+                    <ng-container *ngIf="content.changeRateColor == 'blue'"><span [style.color]="content.changeRateColor">↑ &nbsp;</span></ng-container>
+                    <ng-container *ngIf="content.changeRateColor == 'black'"><span [style.color]="content.changeRateColor">→ &nbsp;</span></ng-container>
+                    <ng-container *ngIf="content.changeRateColor == 'red'"><span [style.color]="content.changeRateColor">↓ &nbsp;</span></ng-container>
+                    <div class="change-rate" [style.color]="content.changeRateColor">{{ content.changeRate || 0 }}%</div>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Rate of change -->
-              <div fxLayout="row" fxFlex="30px" fxFlexFill fxLayoutAlign="start start">
-                <div fxFlex="60" fxLayoutAlign="center center">
-                  <div class="change-rate">{{ content.changeRate || 0 }}</div>
-                </div>
-              </div>
-
-              <!-- description -->
-              <div fxLayout="row" fxFlex="80px" fxFlexFill fxLayoutAlign="start start">
-                <div class="description">{{ content.description }}</div>
-              </div>
+                <!-- description -->
+                <!-- <mat-toolbar class="chartjs-toolbar-hooter" fxLayout="row" fxFlex="30px" [style.background]="content.background" [style.color]="content.titleColor">
+                  <mat-toolbar-row class="chartjs-toolbar-hooter-row" fxLayoutAlign="start center">
+                    <span>{{ content.description }}</span>
+                  </mat-toolbar-row>
+                </mat-toolbar> -->
 
               </div>
-              
-              <mat-progress-bar mode="determinate" value="40" color="warn"></mat-progress-bar>
 
             </mat-card>
           </mat-grid-tile>
